@@ -1,79 +1,100 @@
+
 package GestionAlumnos;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Curso {
 
-    public void CambiarNota(Alumno[] CursoAlumnos, String nombreabuscar, int notanueva) {
-        for (int i = 0; i < CursoAlumnos.length; i++) {
-            if (nombreabuscar.equals(CursoAlumnos[i].nombre)) {
-                CursoAlumnos[i].nota = notanueva;
+    public void CambiarNota(List<Alumno> CursoAlumnos, String nombreabuscar, int notanueva) {
+        for (Alumno a : CursoAlumnos) {
+            if (a.nombre.equalsIgnoreCase(nombreabuscar)) {
+                a.nota = notanueva;
+
             }
         }
 
     }
 
-    public float PromedioNotas(Alumno[] CursoAlumnos) {
+    public float PromedioNotas(List<Alumno> CursoAlumnos) {
         int suma = 0;
-        for (int i = 0; i < CursoAlumnos.length; i++) {
-            suma = suma + CursoAlumnos[i].nota;
+        for (Alumno a : CursoAlumnos) {
+            suma = suma + a.nota;
 
         }
-        return (float) suma / CursoAlumnos.length;
+        return (float) suma / CursoAlumnos.size();
 
     }
 
-    public int CalculoNotaMasAlta(Alumno[] CursoAlumnos) {
-        int NotaMasAlta = CursoAlumnos[0].nota;
-        for (int i = 0; i < CursoAlumnos.length; i++) {
-            if (CursoAlumnos[i].nota > NotaMasAlta) {
-                NotaMasAlta = CursoAlumnos[i].nota;
+    public int CalculoNotaMasAlta(List<Alumno> CursoAlumnos) {
+        if (CursoAlumnos.isEmpty()) {
+            return -1;
+        }
+        int NotaMasAlta = CursoAlumnos.get(0).nota;
+        for (Alumno a : CursoAlumnos) {
+            if (a.nota > NotaMasAlta) {
+                NotaMasAlta = a.nota;
             }
         }
         return NotaMasAlta;
 
     }
 
-    public int CalculoNotaMasBaja(Alumno[] CursoAlumnos) {
-        int NotaMasBaja = CursoAlumnos[0].nota;
-        for (int i = 0; i < CursoAlumnos.length; i++) {
-            if (CursoAlumnos[i].nota < NotaMasBaja) {
-                NotaMasBaja = CursoAlumnos[i].nota;
+    public int CalculoNotaMasBaja(List<Alumno> CursoAlumnos) {
+        if (CursoAlumnos.size() == 0) {
+            return -1;
+        }
+        int NotaMasBaja = CursoAlumnos.get(0).nota;
+        for (Alumno a : CursoAlumnos) {
+            if (a.nota < NotaMasBaja) {
+                NotaMasBaja = a.nota;
             }
         }
         return NotaMasBaja;
     }
 
-    public String BuscarAlumnoNotaMasAlta(Alumno[] CursoAlumnos, int notaalta) {
+    public String BuscarAlumnoNotaMasAlta(List<Alumno> CursoAlumnos, int notaalta) {
         String AlumnoBuscado = "";
-        for (int i = 0; i < CursoAlumnos.length; i++) {
-            if (CursoAlumnos[i].nota == notaalta) {
-                AlumnoBuscado = CursoAlumnos[i].nombre;
+        for (Alumno a : CursoAlumnos) {
+            if (a.nota == notaalta) {
+                AlumnoBuscado = a.nombre;
 
             }
         }
         return AlumnoBuscado;
     }
 
-    public String BuscarAlumnoNotaMasBaja(Alumno[] CursoAlumnos, int notabaja) {
+    public String BuscarAlumnoNotaMasBaja(List<Alumno> CursoAlumnos, int notabaja) {
         String AlumnoBuscado = "";
-        for (int i = 0; i < CursoAlumnos.length; i++) {
-            if (CursoAlumnos[i].nota == notabaja) {
-                AlumnoBuscado = CursoAlumnos[i].nombre;
+        for (Alumno a : CursoAlumnos) {
+            if (a.nota == notabaja) {
+                AlumnoBuscado = a.nombre;
 
             }
         }
         return AlumnoBuscado;
     }
 
-    public Alumno[] AlumnosAprobados(Alumno[] CursoAlumnos) {
-        Alumno[] aprobados = new Alumno[CursoAlumnos.length];
-        int j = 0;
-        for (int i = 0; i < CursoAlumnos.length; i++) {
-            if (CursoAlumnos[i].nota >= 4 && CursoAlumnos[i].tp == true) {
-                aprobados[j] = CursoAlumnos[i];
-                j++;
+    public List<Alumno> AlumnosAprobados(List<Alumno> CursoAlumnos) {
+        List<Alumno> aprobados = new ArrayList<>();
+        for (Alumno a : CursoAlumnos) {
+            if (a.nota >= 4 && a.tp) {
+                aprobados.add(a);
+
             }
         }
         return aprobados;
+    }
+
+    public void MostrarAlumnos(List<Alumno> CursoAlumnos) {
+        System.out.println("Alumnos del curso: ");
+        for (Alumno a : CursoAlumnos) {
+            System.out.println(a.nombre);
+            System.out.println(a.nota);
+            System.out.println(a.tp);
+
+        }
+
     }
 
 }
