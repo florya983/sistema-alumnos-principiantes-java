@@ -1,4 +1,5 @@
-package GestionAlumnos;
+
+ package GestionAlumnos;
 
 
     public class  Alumno {
@@ -23,10 +24,8 @@ package GestionAlumnos;
               
             }
            
-} 
-           
+}           
 
-           
 
                     
 
